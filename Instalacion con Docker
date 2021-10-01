@@ -1,0 +1,22 @@
+INSTALACION Y CONFIGURACION DE JITSI-MEET MEDIANTE DOCKER
+Esta guía se basa en: https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker
+
+1- Clonar el repositorio oficial jitsi-meet para docker
+  git clone https://github.com/jitsi/docker-jitsi-meet && cd docker-jitsi-meet
+
+2- Dentro de la carpeta docker-jitsi-meet debemos copiar el archivo env.example a la actual como .env
+  cp env.example .env
+
+3- Debemos ejectuar el scrip "gen-passwords" ??
+  ./gen-passwords.sh
+
+4- Creamos el directorio CONFIG
+  mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri}
+
+5- Ejecutamos los contenedores
+  docker-compose up -d
+
+6- Podemos acceder al servicio jitsi mediante la URL: https://localhost:8443 (o el puerto que corresponda si editamos el archivo .env)
+
+7- En caso de necesitar transmitir streaming por Youtube se debe ejecutar el contenedor Jibri de la siguiente manera:
+  docker-compose -f docker-compose.yml -f jibri.yml up -d
